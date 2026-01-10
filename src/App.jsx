@@ -113,7 +113,7 @@ function App() {
             </div>
             <div className="btn-group">
               {!image ? (
-                <label className="poke-btn yellow-btn full-width-btn">
+                <label className="poke-btn yellow-btn full-width-btn ">
                   UPLOAD IMAGE
                   <input type="file" onChange={handleUpload} hidden />
                 </label>

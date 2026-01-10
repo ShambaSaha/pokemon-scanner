@@ -254,85 +254,104 @@
 
 /* --- COMPREHENSIVE MOBILE FIX --- */
 /* --- ULTIMATE MOBILE & PIKACHU VISIBILITY FIX --- */
+/* --- FINAL MOBILE OVERFLOW & RESULT FIX --- */
+/* --- ULTIMATE MOBILE REPAIR & PIKACHU DEPTH --- */
 @media (max-width: 850px) {
   .main-wrapper {
-    /* Anchors background to the right where Pikachu is */
-    background-position: right 20% center; 
-    background-attachment: scroll;
-    padding: 40px 10px 80px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* Anchors background to the right so Pikachu is seen behind the glass */
+    background-attachment: fixed;
+    background-position: 85% center; 
+    padding: 30px 10px 120px 10px;
+    height: auto;
+    min-height: 100vh;
+    display: block; 
     overflow-y: auto;
   }
 
   .lab-window {
-    /* Scale down slightly so we see more background */
-    width: 92vw; 
-    max-width: 380px;
+    width: 96vw;
+    max-width: 390px;
+    margin: 0 auto;
     height: auto;
-    border-width: 3px;
-    /* Semi-transparent background so Pikachu peeks through */
-    background: rgba(45, 52, 54, 0.85); 
-    backdrop-filter: blur(4px); 
+    /* This fix prevents the white header from 'breaking' the rounded corners */
+    overflow: hidden; 
+    border: 3px solid #3b4cca;
+    border-radius: 20px;
+    background: rgba(45, 52, 54, 0.88); /* Glass effect */
+    backdrop-filter: blur(6px);
+  }
+
+  .lab-header {
+    background: white;
+    padding: 12px 5px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .header-text {
     font-size: 1.2rem;
-    padding: 10px 5px;
+    line-height: 1.1;
   }
 
   .lab-grid {
-    grid-template-columns: 1fr;
-    padding: 8px;
-    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
   }
 
-  .panel {
-    /* Make panels more transparent to see the background image */
-    background: rgba(0, 0, 0, 0.3); 
-    height: auto;
-    min-height: 280px;
-    padding: 12px;
-  }
-
-  .viewport {
-    height: 150px; /* Slimmer for mobile */
-  }
-
-  /* BUTTON FIXES */
+  /* UPLOAD BUTTON FIX */
   .btn-group {
-    margin-top: 12px;
+    margin-top: 15px;
     width: 100%;
   }
 
   .full-width-btn {
-    display: block !important;
-    width: 100%;
-    text-align: center;
-    padding: 14px 0;
+    display: flex !important; /* Forces centering */
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    padding: 16px 0;
+    background: #ffcb05;
+    color: #3b4cca;
+    border: 3px solid #3b4cca;
+    border-radius: 8px;
+    font-family: sans-serif;
+    font-size: 0.9rem;
     box-sizing: border-box;
+    cursor: pointer;
   }
 
   .action-btns {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    gap: 10px;
   }
 
-  .poke-btn {
-    width: 100%;
-    font-size: 0.85rem;
+  .panel {
+    min-height: auto;
+    background: rgba(0, 0, 0, 0.2); /* Lighter panel for better visibility */
   }
 
-  /* FOOTER FIX */
+  .viewport {
+    height: 170px;
+  }
+
+  .result-card {
+    height: auto;
+    padding: 15px 10px;
+  }
+
+  .poke-img {
+    height: 160px;
+    margin-bottom: 10px;
+  }
+
   .bg-footer-text {
     position: relative;
-    margin-top: 40px;
-    font-size: 1.1rem;
+    margin: 50px auto 20px;
     text-align: center;
-    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
-    color: #3b4cca;
-    width: 100%;
+    display: block;
+    font-size: 1.3rem;
   }
 }
