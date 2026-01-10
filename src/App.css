@@ -252,72 +252,87 @@
 
 /* --- END LOADING SCREEN STYLES --- */
 
-/* --- RESPONSIVE MOBILE FIX --- */
+/* --- COMPREHENSIVE MOBILE FIX --- */
+/* --- ULTIMATE MOBILE & PIKACHU VISIBILITY FIX --- */
 @media (max-width: 850px) {
   .main-wrapper {
-    padding: 10px;
+    /* Anchors background to the right where Pikachu is */
+    background-position: right 20% center; 
+    background-attachment: scroll;
+    padding: 40px 10px 80px 10px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto; /* Allows scrolling on long phone screens */
+    overflow-y: auto;
   }
 
   .lab-window {
-    width: 95vw; /* Takes up most of the phone width */
-    height: auto; /* Lets the height grow to fit stacked panels */
-    max-width: 450px;
-    margin-bottom: 80px; /* Leaves room for "Gotta catch 'em all" */
+    /* Scale down slightly so we see more background */
+    width: 92vw; 
+    max-width: 380px;
+    height: auto;
+    border-width: 3px;
+    /* Semi-transparent background so Pikachu peeks through */
+    background: rgba(45, 52, 54, 0.85); 
+    backdrop-filter: blur(4px); 
   }
 
   .header-text {
-    font-size: 1.2rem; /* Shrinks title to fit on one line */
+    font-size: 1.2rem;
+    padding: 10px 5px;
   }
 
   .lab-grid {
-    grid-template-columns: 1fr; /* Stacks panels on top of each other */
-    padding: 10px;
-    gap: 15px;
+    grid-template-columns: 1fr;
+    padding: 8px;
+    gap: 12px;
   }
 
   .panel {
-    width: 100%;
-    height: auto; /* Removes fixed height so buttons don't overlap */
+    /* Make panels more transparent to see the background image */
+    background: rgba(0, 0, 0, 0.3); 
+    height: auto;
+    min-height: 280px;
     padding: 12px;
-    box-sizing: border-box;
   }
 
   .viewport {
-    height: 180px; /* Shorter viewport for mobile */
+    height: 150px; /* Slimmer for mobile */
   }
 
-  .status-message-poke {
-    font-size: 0.9rem; /* Smaller font so it doesn't wrap weirdly */
-  }
-
-  .result-card {
-    padding: 10px;
-  }
-
-  .poke-img {
-    height: 120px;
-  }
-
-  .bg-footer-text {
-    position: relative; /* Moves text into the scroll flow instead of floating */
-    bottom: 0;
-    left: 0;
-    text-align: center;
+  /* BUTTON FIXES */
+  .btn-group {
+    margin-top: 12px;
     width: 100%;
-    margin: 20px 0;
-    font-size: 1.2rem;
   }
-}
 
-/* Fix for the Loading Screen on Mobile */
-@media (max-width: 600px) {
-  .loading-text-poke {
-    font-size: 1.8rem;
-    -webkit-text-stroke: 1px #3b4cca;
+  .full-width-btn {
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    box-sizing: border-box;
+  }
+
+  .action-btns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .poke-btn {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  /* FOOTER FIX */
+  .bg-footer-text {
+    position: relative;
+    margin-top: 40px;
+    font-size: 1.1rem;
+    text-align: center;
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+    color: #3b4cca;
+    width: 100%;
   }
 }

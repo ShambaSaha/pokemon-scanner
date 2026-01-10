@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js';
+import toast, { Toaster } from 'react-hot-toast';
 import './App.css';
 
 function App() {
@@ -45,20 +46,31 @@ function App() {
     if (!imgRef.current) return;
     setIsScanning(true);
     const detection = await faceapi.detectSingleFace(imgRef.current, new faceapi.TinyFaceDetectorOptions());
-    
+
     if (!detection) {
-      alert("DNA Signature not found.");
+      toast.error("FACE NOT FOUND", {
+        duration: 5000,
+        position: 'top-center',
+        style: {
+          border: '3px solid #3b4cca',
+          padding: '16px',
+          color: '#3b4cca',
+          fontFamily: "Arial, sans-serif",
+          background: '#ffcb05',
+          borderRadius: '12px',
+        },
+      });
       setIsScanning(false);
       return;
     }
 
     const hash = Math.floor(detection.box.x + detection.box.y);
     const pokeId = (hash % 151) + 1;
-    const percent = 92 + (hash % 7); 
-    
+    const percent = 92 + (hash % 7);
+
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeId}`);
     const data = await res.json();
-    
+
     setPokemon(data);
     setDnaPercent(percent);
     setIsScanning(false);
@@ -78,6 +90,7 @@ function App() {
 
   return (
     <div className="main-wrapper">
+      <Toaster />
       <div className="lab-window">
         <header className="lab-header">
           <div className="status-dots">
@@ -95,13 +108,14 @@ function App() {
               {image ? (
                 <img ref={imgRef} src={image} alt="subject" />
               ) : (
-                <div className="status-message-poke glow-anim">Awaiting DNA Sample...</div>
+                <div className="status-message-poke">Awaiting Sample...</div>
               )}
             </div>
             <div className="btn-group">
               {!image ? (
-                <label className="poke-btn yellow-btn">
-                  UPLOAD IMAGE <input type="file" onChange={handleUpload} hidden />
+                <label className="poke-btn yellow-btn full-width-btn">
+                  UPLOAD IMAGE
+                  <input type="file" onChange={handleUpload} hidden />
                 </label>
               ) : (
                 <div className="action-btns">
@@ -115,7 +129,6 @@ function App() {
               )}
             </div>
           </div>
-
           {/* RESULT */}
           <div className="panel">
             <h3 className="panel-tag">Result Section</h3>
@@ -127,7 +140,7 @@ function App() {
                 <img src={pokemon.sprites.other['official-artwork'].front_default} alt="match" className="poke-img" />
                 <h2 className="card-name">{pokemon.name.toUpperCase()}</h2>
                 <div className="type-pill">{pokemon.types[0].type.name.toUpperCase()}</div>
-                
+
                 <div className="dna-metrics">
                   <div className="dna-label">
                     <span>FACE SIMILARITY</span>
@@ -140,7 +153,7 @@ function App() {
               </div>
             ) : (
               <div className="empty-msg-box">
-                 <p className="status-message-poke glow-anim">INITIALIZE SCAN TO VIEW DATA...</p>
+                <p className="status-message-poke glow-anim">INITIALIZE SCAN TO VIEW DATA...</p>
               </div>
             )}
           </div>
