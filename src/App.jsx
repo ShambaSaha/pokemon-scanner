@@ -65,7 +65,7 @@ function App() {
     }
 
     const hash = Math.floor(detection.box.x + detection.box.y);
-    const pokeId = (hash % 151) + 1;
+    const pokeId = (hash % 905) + 1;
     const percent = 92 + (hash % 7);
 
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeId}`);
@@ -113,16 +113,30 @@ function App() {
             </div>
             <div className="btn-group">
               {!image ? (
-                <label className="poke-btn yellow-btn full-width-btn ">
+                <label className="poke-btn yellow-btn full-width-btn">
                   UPLOAD IMAGE
                   <input type="file" onChange={handleUpload} hidden />
                 </label>
               ) : (
                 <div className="action-btns">
-                  <button onClick={removeImage} className="poke-btn red-btn">REMOVE IMAGE</button>
+                  <button onClick={removeImage} className="poke-btn red-btn">
+                    REMOVE IMAGE
+                  </button>
+
                   {!pokemon && (
-                    <button onClick={findMatch} className="poke-btn green-btn">
-                      {isScanning ? "SCANNING..." : "RUN FACE MATCH"}
+                    <button
+                      onClick={findMatch}
+                      className={`poke-btn green-btn ${isScanning ? 'loading' : ''}`}
+                      disabled={isScanning}
+                    >
+                      {isScanning ? (
+                        <span className="btn-content">
+                          <span className="spinner-dna"></span>
+                          ANALYZING DNA...
+                        </span>
+                      ) : (
+                        "RUN DNA MATCH"
+                      )}
                     </button>
                   )}
                 </div>

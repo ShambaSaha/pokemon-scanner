@@ -355,3 +355,54 @@
     font-size: 1.3rem;
   }
 }
+
+/* --- BUTTON LOADING ANIMATION --- */
+
+.green-btn.loading {
+  background: #27ae60;
+  opacity: 0.8;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Small spinner inside the button */
+.spinner-dna {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Subtle pulse effect for the button text during scan */
+.green-btn.loading .btn-content {
+  animation: buttonPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes buttonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Desktop Hover Effect (Disable during loading) */
+.poke-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.poke-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
