@@ -1,408 +1,52 @@
-/* 1. BACKGROUND & POSITIONING */
-.main-wrapper {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: flex-start; /* Forces window to stay at the top */
-  justify-content: flex-start;
-  background: url('/image.jpg') no-repeat center center fixed;
+/* Update the main page wrapper styling */
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+.pokedex-page-wrapper {
+  /* Using a Pokeball-colored gradient or your image */
+  background-color: #1a1a1a !important;
+  background: url('/image.jpg') center/cover no-repeat fixed;
   background-size: cover;
-  padding-left: 50px;
-  padding-top: 40px; /* Adjust this to push the box even higher */
-  box-sizing: border-box;
-  overflow: hidden;
+  background-position: center;
+  overflow-x: hidden;
+  width: 100%;
+}
+/* Inline the font directly so html-to-image can see it */
+@font-face {
+    font-family: 'Pokemon Solid';
+    src: url('https://fonts.cdnfonts.com/s/17890/Pokemon Solid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/* 2. CONSTANT BOX SIZE & ROUNDED CORNER FIX */
-.lab-window {
-  background: rgba(45, 52, 54, 0.96);
-  width: 820px; /* Constant Pixel Width */
-  height: 520px; /* Constant Pixel Height - Reduced to avoid overlap */
-  border-radius: 20px;
-  border: 4px solid #3b4cca;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* THIS FIXES THE SQUARE WHITE HEADER EDGES */
-  z-index: 10;
+/* Use a standard color for the wrapper to avoid oklch errors */
+.pokedex-page-wrapper {
+    background-color: #1a1a1a !important; 
+}
+/* If you have a specific background image file: */
+/*
+.pokedex-page-wrapper {
+  background-image: url('/your-background-image.jpg');
+  background-size: cover;
+}
+*/
+
+/* Ensure the Pokemon Font is loaded */
+@font-face {
+  font-family: 'PokemonSolid';
+  src: url('/fonts/Pokemon Solid.ttf'); /* Ensure you have this font */
 }
 
-.lab-header {
-  background: white;
-  padding: 12px;
-  text-align: center;
-  border-bottom: 4px solid #3b4cca;
+.pokemon-font {
+  color: #ffcb05 !important;
+  font-family: 'PokemonSolid', 'Arial Black', sans-serif;
+  -webkit-text-stroke: 1.5px #3b4cca;
+  letter-spacing: 0.38rem;
+  paint-order: stroke fill;
 }
 
-.header-text {
-  font-family: 'Pokemon Solid', sans-serif;
-  color: #ffcb05;
-  -webkit-text-stroke: 1.3px #3b4cca;
-  text-shadow: 2px 2px #3b4cca;
-  font-size: 2rem;
-  margin: 0;
-  letter-spacing: 5px;
-}
-
-/* 3. GRID & PANELS */
-.lab-grid {
-  display: grid;
-  grid-template-columns: 380px 380px; /* Locked Width */
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-}
-
-.panel {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 15px;
-  border-radius: 12px;
-  height: 380px; /* Locked Height */
-  display: flex;
-  flex-direction: column;
-}
-
-.panel-tag {
-  background: #3b4cca;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-  align-self: flex-start;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-.status-message-poke {
-  font-family: 'Pokemon Solid', sans-serif;
-  color: #ffcb05;
-  -webkit-text-stroke: 0.8px #3b4cca;
-  text-shadow: 1.5px 1.5px #3b4cca;
-  font-size: 1.1rem;
-  letter-spacing: 1.5px;
-  text-align: center;
-  margin: auto; /* Centers in viewport/empty box */
-}
-
-
-.viewport {
-  background: #000;
-  height: 240px;
-  border-radius: 8px;
-  border: 2px solid #555;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.viewport img { width: 100%; height: 100%; object-fit: contain; }
-
-/* 4. BUTTONS */
-.btn-group { margin-top: auto; }
-.action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-.poke-btn {
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 900;
-  cursor: pointer;
-  border: 3px solid #3b4cca;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-family: sans-serif;
-}
-
-.yellow-btn { background: #ffcb05; color: #3b4cca; width: 100%; }
-.red-btn { background: #ff7675; color: white; border-color: #d63031; }
-.green-btn { background: #2ecc71; color: white; border-color: #27ae60; }
-
-/* 5. POKEMON CARD FIX */
-.result-card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  color: #333;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card-top { font-size: 0.75rem; font-weight: bold; color: #777; margin-bottom: 5px; }
-
-.poke-img { height: 160px; object-fit: contain; margin: 0 auto; }
-
-.card-name {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  color: #333;
-  margin: 5px 0;
-}
-
-.type-pill {
-  background: #3b4cca;
-  color: white;
-  padding: 3px 12px;
-  border-radius: 20px;
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin: 0 auto;
-}
-
-/* 6. DNA BAR & PERCENTAGE */
-.dna-metrics { margin-top: 10px; text-align: left; }
-.dna-label { 
-    display: flex; 
-    justify-content: space-between; 
-    font-weight: bold; 
-    font-size: 0.7rem; 
-    color: #555; 
-}
-.percent-text { color: #3b4cca; }
-
-.bar-bg { background: #eee; height: 10px; border-radius: 5px; margin-top: 4px; border: 1px solid #ddd; }
-.bar-fill { 
-    background: linear-gradient(90deg, #3b4cca, #00eeff); 
-    height: 100%; 
-    border-radius: 5px; 
-    transition: width 1s ease; 
-}
-
-.empty-msg-box { text-align: center; padding-top: 120px; color: #ffcb05; font-weight: bold; }
-
-.status-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 5px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; }
-.blue { background: #00eeff; } .red { background: #ff3b3b; } .yellow { background: #ffcc00; } .green { background: #2ecc71; }
-
-
-/* --- LOADING SCREEN STYLES --- */
-
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle, #2d3436 0%, #000000 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensures it sits above everything else */
-}
-
-.loading-content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.loading-text-poke {
-  font-family: 'Pokemon Solid', sans-serif;
-  color: #ffcb05;
-  font-size: 3rem;
-  letter-spacing: 4px;
-  -webkit-text-stroke: 2px #3b4cca;
-  text-shadow: 4px 4px #3b4cca;
-  margin: 0;
-  animation: pulse-glow 1.5s infinite ease-in-out;
-}
-
-.loading-subtext {
-  color: #00eeff;
-  font-family: sans-serif;
-  font-weight: bold;
-  letter-spacing: 5px;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-/* HIGH-TECH SPINNER */
-.loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid rgba(59, 76, 202, 0.3);
-  border-top: 4px solid #ffcb05;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  box-shadow: 0 0 15px rgba(0, 238, 255, 0.2);
-}
-
-/* ANIMATIONS */
-@keyframes pulse-glow {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.9;
+@media (max-width: 768px) {
+  .pokedex-page-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    items-align: center;
   }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-    text-shadow: 0 0 20px rgba(255, 203, 5, 0.5);
-  }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* --- END LOADING SCREEN STYLES --- */
-
-/* --- COMPREHENSIVE MOBILE FIX --- */
-/* --- ULTIMATE MOBILE & PIKACHU VISIBILITY FIX --- */
-/* --- FINAL MOBILE OVERFLOW & RESULT FIX --- */
-/* --- ULTIMATE MOBILE REPAIR & PIKACHU DEPTH --- */
-@media (max-width: 850px) {
-  .main-wrapper {
-    /* Anchors background to the right so Pikachu is seen behind the glass */
-    background-attachment: fixed;
-    background-position: 85% center; 
-    padding: 30px 10px 120px 10px;
-    height: auto;
-    min-height: 100vh;
-    display: block; 
-    overflow-y: auto;
-  }
-
-  .lab-window {
-    width: 96vw;
-    max-width: 390px;
-    margin: 0 auto;
-    height: auto;
-    /* This fix prevents the white header from 'breaking' the rounded corners */
-    overflow: hidden; 
-    border: 3px solid #3b4cca;
-    border-radius: 20px;
-    background: rgba(45, 52, 54, 0.88); /* Glass effect */
-    backdrop-filter: blur(6px);
-  }
-
-  .lab-header {
-    background: white;
-    padding: 12px 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .header-text {
-    font-size: 1.2rem;
-    line-height: 1.1;
-  }
-
-  .lab-grid {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 15px;
-  }
-
-  /* UPLOAD BUTTON FIX */
-  .btn-group {
-    margin-top: 15px;
-    width: 100%;
-  }
-
-  .full-width-btn {
-    display: flex !important; /* Forces centering */
-    justify-content: center;
-    align-items: center;
-    width: 100% !important;
-    padding: 16px 0;
-    background: #ffcb05;
-    color: #3b4cca;
-    border: 3px solid #3b4cca;
-    border-radius: 8px;
-    font-family: sans-serif;
-    font-size: 0.9rem;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-
-  .action-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .panel {
-    min-height: auto;
-    background: rgba(0, 0, 0, 0.2); /* Lighter panel for better visibility */
-  }
-
-  .viewport {
-    height: 170px;
-  }
-
-  .result-card {
-    height: auto;
-    padding: 15px 10px;
-  }
-
-  .poke-img {
-    height: 160px;
-    margin-bottom: 10px;
-  }
-
-  .bg-footer-text {
-    position: relative;
-    margin: 50px auto 20px;
-    text-align: center;
-    display: block;
-    font-size: 1.3rem;
-  }
-}
-
-/* --- BUTTON LOADING ANIMATION --- */
-
-.green-btn.loading {
-  background: #27ae60;
-  opacity: 0.8;
-  cursor: not-allowed;
-  position: relative;
-}
-
-.btn-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* Small spinner inside the button */
-.spinner-dna {
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top: 2px solid white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Subtle pulse effect for the button text during scan */
-.green-btn.loading .btn-content {
-  animation: buttonPulse 1.5s infinite ease-in-out;
-}
-
-@keyframes buttonPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-/* Desktop Hover Effect (Disable during loading) */
-.poke-btn:hover:not(:disabled) {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-}
-
-.poke-btn:active:not(:disabled) {
-  transform: translateY(0);
 }
